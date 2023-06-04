@@ -61,10 +61,13 @@ impl Config {
             (Some(_), None) | (None, Some(_)) => {
                 bail!("Supply all arguments or none")
             }
-            _ => serde_json::from_reader(
-                File::open(format!("/etc/{}", env!("CARGO_BIN_NAME")))
-                    .with_context(|| "Loading config file")?,
-            )?,
+            _ => {
+                let path = format!("/etc/{}.conf", env!("CARGO_BIN_NAME"));
+                serde_json::from_reader(
+                    File::open(&path)
+                        .with_context(|| format!("Failed to load config file: {}", path))?,
+                )?
+            }
         };
         if result.inverters.is_empty() {
             bail!("No inverters given");
