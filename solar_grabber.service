@@ -1,0 +1,9 @@
+[Unit]
+Description=Solar Grabber
+
+[Service]
+ExecStart=/bin/sun-status-grabber
+
+[Install]
+WantedBy=multi-user.target
+

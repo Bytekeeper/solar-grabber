@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs Solar Grabber service every minute
+
+[Timer]
+OnCalendar=*:*:0/1
+
+[Install]
+WantedBy=timers.target
+
